@@ -10,24 +10,40 @@ jobs:
       - name: Descargando repositorio de git
         uses: actions/checkout@v3
       - run: echo "el repositorio ${{ github.repository }} ha sido clonado"
+      - name: Subir "artifacts"
+        uses: actions/upload-artifacts@v3
+        with:
+          name: main
+          path: main.c
 
   Compilar:
     needs: PasoUno
     runs-on: ubuntu-latest
     steps:
+      - name: Descargar "artifacts"
+        uses: actions/download-artifact@v3
       - run: gcc -o holaMundo ${{ github.workspace }}/main.c
       - run: ls -l
+      - name: Subir "artifacts"
+        uses: actions/upload-artifacts@v3
+        with:
+          name: holaMundo
+          path: holaMundo
 
   Probar:
     needs: Compilar
     runs-on: ubuntu-latest
     steps:
+      - name: Descargar "artifacts"
+        uses: actions/download-artifact@v3
       - run: ./holaMundo
 
   Comprimir:
     needs: Compilar
     runs-on: ubuntu-latest
     steps:
+      - name: Descargar "artifacts"
+        uses: actions/download-artifact@v3
       - run: cp holaMundo pepe.exe
       - run: ls -l
 
