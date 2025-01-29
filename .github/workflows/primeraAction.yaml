@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Descargar "artifacts"
         uses: actions/download-artifact@v3
+      - run: ls -l
+      - run: file main.c
       - run: gcc -o holaMundo ${{ github.workspace }}/main.c
       - run: ls -l
       - name: Subir "artifacts"
