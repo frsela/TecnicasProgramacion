@@ -7,3 +7,10 @@ jobs:
     steps:
       - run: echo "Hola mundo desde Ubuntu"
       - run: ls -l
+      - name: Descargando repositorio de git
+        uses: actions/checkout@v3
+      - run: echo "el repositorio ${{ github.repository }} ha sido clonado"
+      - run: gcc -o holaMundo ${{ github.workspace }}/main.c
+      - run: ls -l
+      - run: ./holaMundo
+
