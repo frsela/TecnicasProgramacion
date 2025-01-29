@@ -1,0 +1,9 @@
+name: Primera acción
+run-name: Ejecutando mi primera acción
+on: [push]
+jobs:
+  PrimerTrabajo:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hola mundo desde Ubuntu"
+      - run: ls -l
