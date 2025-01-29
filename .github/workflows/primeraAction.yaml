@@ -13,7 +13,7 @@ jobs:
       - name: Subir "artifacts"
         uses: actions/upload-artifact@v3
         with:
-          name: main
+          name: main.c
           path: main.c
 
   Compilar:
