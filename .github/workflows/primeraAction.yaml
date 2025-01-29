@@ -2,7 +2,7 @@ name: Primera acción
 run-name: Ejecutando mi primera acción
 on: [push]
 jobs:
-  PrimerTrabajo:
+  PasoUno:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Hola mundo desde Ubuntu"
@@ -10,7 +10,24 @@ jobs:
       - name: Descargando repositorio de git
         uses: actions/checkout@v3
       - run: echo "el repositorio ${{ github.repository }} ha sido clonado"
+
+  Compilar:
+    needs: PasoUno
+    runs-on: ubuntu-latest
+    steps:
       - run: gcc -o holaMundo ${{ github.workspace }}/main.c
       - run: ls -l
+
+  Probar:
+    needs: Compilar
+    runs-on: ubuntu-latest
+    steps:
       - run: ./holaMundo
+
+  Comprimir:
+    needs: Compilar
+    runs-on: ubuntu-latest
+    steps:
+      - run: cp holaMundo pepe.exe
+      - run: ls -l
 
